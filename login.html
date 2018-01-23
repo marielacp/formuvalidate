@@ -53,7 +53,7 @@
                                 <div class="form-group color-text">
                                     <label for="inputEmail">Gender</label>
                                     <select id="sel1" class="form-control transparent-gender text-color focus-color">
-                                        <option class="color">Select your gender...</option>
+                                        <option value="opt" class="color">Select your gender...</option>
                                         <option value="1" class="color">Female</option>
                                         <option value="2" class="color">Male</option>
                                     </select>
@@ -88,6 +88,22 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
     <script src="js/register.js"></script>
+
+    
+<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyA5xRV6HetnLjy1roz8p02q_PB08ElKpfM",
+    authDomain: "maquikis.firebaseapp.com",
+    databaseURL: "https://maquikis.firebaseio.com",
+    projectId: "maquikis",
+    storageBucket: "maquikis.appspot.com",
+    messagingSenderId: "70093724980"
+  };
+  firebase.initializeApp(config);
+</script>
+
 </body>
 
 </html>

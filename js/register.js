@@ -4,6 +4,7 @@ $(document).ready(function() {
   var $password = $('#inputPassword');
   var $confirpassword = $('#inputPasswordAgain');
   var $checkbox = $('input[type="checkbox"]');
+  var $select = $('#sel1')
   var $register = $('#log-in');
 
   /* Evento input, comprobando que cumpla validaciones*/
@@ -28,39 +29,6 @@ $(document).ready(function() {
     }
   });
 
-/*contraseñas*/
- /*$password.focusout(function () {
-if($(this).val().length > 0 && $(this).val().length <= 3){
-  $('.error1').hide();
-  $('.error2').hide();
-  $(this).focus().after("<span class='error'>Contraseña muy corta</span>");   
-}
-else if ($(this).val().length > 3 && $(this).val().length <= 8) {
-  $('.error').hide();
-  $('.error2').hide();
-  $(this).focus().after("<span class='error1'>Contraseña valida</span>");    
-}
-else {
-  $('.error').hide();
-  $('.error1').hide();
-  $(this).focus().after("<span class='error2'>Error:(maximo 8 caracteres)</span>");
-}
-  });
- 
- $confirpassword.focusout(function () {
-   if ($(this).val().length > 3 && $(this).val().length <= 8) {
-     if (($password).val() === ($confirpassword).val()){
-       $(this).focus().after("<span class='error'>Contraseñas iguales</span>");
-     }
-     else{
-       $(this).focus().after("<span class='error'>Contraseñas no son iguales</span>");
-     }
-}
-else{
-     $(this).focus().after("<span class='error'>sdsds</span>");
-}
- });*/
-
 $password.focusin(function () {
 $(this).addClass("miClase");
 });
@@ -84,10 +52,12 @@ $(this).addClass("miClase");
     } else if ($(this).val().length > 3 && $(this).val().length <= 8) {
       if(($password).val() === ($confirpassword).val()){
         $("#errorcp").html("<span stye='color:green;'>Tus contraseñas son iguales</span>");
+             
       }
       
      else {
-       $("#errorcp").html("<span stye='color:green;'>Tus contraseñas son iguales</span>");
+       $("#errorcp").html("<span stye='color:green;'>Tus contraseñas no son iguales</span>");
+       $(this).val('');
     }
      }
      else{
@@ -95,15 +65,54 @@ $(this).addClass("miClase");
      }
   });
 
+$select.change(function(){
+  if($(this).val()==='opt'){
+    $(this).focus().after("<span class='error'>Selecciona una opcion</span>");       
+  
+} else {
+  $('.error').hide();
+}
+});
   /* Boton next o submit si los datos se validan correctamente nos trasladamos al la pagina final */
-  /*$submit.click(function(event) {
+  $register.click(function(event) {
     /* console.log(event.target.checked) */
-   /* if ($checkbox.prop('checked') && ($firstName.val()!=='') && ($lastName.val()!=='') && ($email.val()!=='')) {
+    if ($checkbox.prop('checked') && ($name.val()!=='') && ($email.val()!=='') && ($password.val()!=='') && ($confirpassword.val()!=='')) {
       event.preventDefault();
       window.location.href = '../views/end.html';
     } else {
       alert('Por favor complete todos los campos');
+    
       event.preventDefault();
     }    
-  });*/
+  });
+
+ /* Firebase */
+ var provider = new firebase.auth.GoogleAuthProvider();
+ $('#sign-up').on('click',function(){
+  firebase.auth().signInWithPopup(provider).then(function(result) {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    //var token = result.credential.accessToken;
+    // The signed-in user info.
+    var user = result.user;
+    console.log(user);
+    // ...
+  }).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+    // ...
+  });
+  
+ }) 
+
+
+
+
+
+
+
 });
